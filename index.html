@@ -1,35 +1,26 @@
-name: Deploy to GitHub Pages
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Security KPI Dashboard - Standalone</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/recharts@2.8.0/umd/Recharts.js"></script>
+</head>
+<body class="bg-gray-50">
+  <div id="root"></div>
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+    const { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } = Recharts;
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        
-    - name: Install dependencies
-      run: |
-        cd client
-        npm install
-        
-    - name: Build React app
-      run: |
-        cd client
-        npm run build
-        
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./client/build
+    // Mock data for standalone version
+    const mockData = {
+      performanceData: [
+        { kpi_type_id: 1, kpi_name: 'Vehicle Patrols', unit: 'patrols', total_shifts: 30, total_target: 240, total_actual: 228, avg_achievement_percentage: 95.0, max_achievement_percentage: 125.0, min_achievement_percentage: 75.0 },
+        { kpi_type_id: 2, kpi_name: 'Escorts', unit: 'escorts', total_shifts: 30, total_target: 300, total_actual: 312, avg_achievement_percentage: 104.0, max_achievement_percentage: 130.0, min_achievement_percentage: 80.0 },
+        { kpi_type_id: 3, kpi_name: 'System Tests', unit: 'tests', total_shifts: 30, total_target: 120, total_actual: 108, avg_achievement_percentage: 90.0, max_achievement_percentage: 110.0, min_achievement_percentage: 70.0 },
+        { kpi_type_id: 4, kpi_n_
